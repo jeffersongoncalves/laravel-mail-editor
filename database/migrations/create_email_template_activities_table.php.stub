@@ -1,0 +1,30 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('email_template_activities', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('template_id')
+                ->constrained(config('mail-editor.table_name', 'email_templates'))
+                ->cascadeOnDelete();
+            $table->string('action', 30)->index();
+            $table->string('performed_by')->nullable();
+            $table->json('metadata')->nullable();
+            $table->timestamp('created_at');
+
+            $table->index(['template_id', 'action']);
+            $table->index(['template_id', 'created_at']);
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('email_template_activities');
+    }
+};

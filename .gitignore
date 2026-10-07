@@ -1,0 +1,13 @@
+/vendor
+/node_modules
+/.phpunit.cache
+/build
+.phpunit.result.cache
+composer.lock
+.idea
+.claude
+.ai
+docs
+CLAUDE.md
+PROJECT.md
+USAGE_GUIDE.md

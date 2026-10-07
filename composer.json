@@ -1,0 +1,74 @@
+{
+    "name": "jeffersongoncalves/laravel-mail-editor",
+    "description": "Block-based email templates for Laravel: 22 email-safe blocks, table-based inline-CSS HTML export, template variables, review workflow, versioning, A/B variants, brand kits, themes and quality checks.",
+    "keywords": [
+        "laravel",
+        "email",
+        "email-template",
+        "email-builder",
+        "mail",
+        "newsletter",
+        "html-email"
+    ],
+    "homepage": "https://github.com/jeffersongoncalves/laravel-mail-editor",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Jefferson Gonçalves",
+            "email": "gerson.simao.92@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "ext-gd": "*",
+        "illuminate/contracts": "^11.28|^12.0|^13.0",
+        "illuminate/database": "^11.28|^12.0|^13.0",
+        "illuminate/mail": "^11.28|^12.0|^13.0",
+        "illuminate/support": "^11.28|^12.0|^13.0",
+        "spatie/laravel-package-tools": "^1.16",
+        "tijsverkoyen/css-to-inline-styles": "^2.2"
+    },
+    "require-dev": {
+        "larastan/larastan": "^3.0",
+        "laravel/pint": "^1.14",
+        "nunomaduro/collision": "^8.1",
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "pestphp/pest": "^3.7|^4.0",
+        "pestphp/pest-plugin-laravel": "^3.0|^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "JeffersonGoncalves\\MailEditor\\": "src/",
+            "JeffersonGoncalves\\MailEditor\\Database\\Factories\\": "database/factories/",
+            "JeffersonGoncalves\\MailEditor\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JeffersonGoncalves\\MailEditor\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/pest",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "JeffersonGoncalves\\MailEditor\\MailEditorServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
