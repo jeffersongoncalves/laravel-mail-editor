@@ -3,10 +3,13 @@
 namespace JeffersonGoncalves\MailEditor\Tests;
 
 use JeffersonGoncalves\MailEditor\MailEditorServiceProvider;
+use JeffersonGoncalves\PestPluginDatabaseMigrations\LoadsPackageMigrations;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
+    use LoadsPackageMigrations;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -16,28 +19,7 @@ class TestCase extends Orchestra
 
     protected function defineDatabaseMigrations(): void
     {
-        $migrationPath = __DIR__.'/../database/migrations';
-        $files = glob($migrationPath.'/*.php.stub');
-
-        foreach ($files as $file) {
-            $migrationFile = $migrationPath.'/'.basename($file, '.stub');
-
-            if (! file_exists($migrationFile)) {
-                copy($file, $migrationFile);
-            }
-        }
-
-        $this->loadMigrationsFrom($migrationPath);
-
-        $this->beforeApplicationDestroyed(function () use ($migrationPath, $files) {
-            foreach ($files as $file) {
-                $migrationFile = $migrationPath.'/'.basename($file, '.stub');
-
-                if (file_exists($migrationFile)) {
-                    unlink($migrationFile);
-                }
-            }
-        });
+        $this->loadPackageMigrations(MailEditorServiceProvider::class);
     }
 
     protected function getPackageProviders($app): array
